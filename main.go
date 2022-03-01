@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	f20220301()
+	f20220302()
 	//f202112128()
 	//print("a")
 	//var str = "abcde"
