@@ -5,6 +5,9 @@ import (
 )
 
 // f20211217
+func f20211217() {
+	//rand.Read()
+}
 
 //type sp interface {
 //	Out(key string, val interface{})                  //存入key /val，如果该key读取的 goroutine挂起，则唤醒。此方法不会阻塞，时刻都可以立即执行并返回
