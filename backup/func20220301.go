@@ -1,4 +1,4 @@
-package main
+package backup
 
 func f20220301() {
 	//var arr = new([]int)
