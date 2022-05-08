@@ -16,11 +16,11 @@ func F009() {
 		wg.Done()
 	}()
 	fmt.Println("start wait")
-	wgWaitTimeout(&wg, 30*time.Second)
+	F009WgWaitTimeout(&wg, 30*time.Second)
 	fmt.Println("end wait")
 }
 
-func wgWaitTimeout(wg *sync.WaitGroup, timeout time.Duration) {
+func F009WgWaitTimeout(wg *sync.WaitGroup, timeout time.Duration) {
 	ctx, _ := context.WithTimeout(context.Background(), timeout)
 	var done = make(chan struct{}, 1)
 	go func() {
