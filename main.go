@@ -1,9 +1,7 @@
 package main
 
-import (
-	"leaning/interview"
-)
+import "leaning/interview"
 
 func main() {
-	interview.F018()
+	interview.F019()
 }
