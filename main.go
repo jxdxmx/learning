@@ -3,6 +3,8 @@ package main
 import "fmt"
 
 func main() {
+	var i int
+	i++
 	fmt.Println(-1 & 1)
 	fmt.Println(-1 << 1)
 	//fmt.Println(-2 >> 1)
