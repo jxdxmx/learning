@@ -18,7 +18,15 @@ import "math"
 //对于本题⽽⾔，当 needle 是空字符串时我们应当返回 0 。这与C语⾔的 strstr() 以及
 //Java的 indexOf() 定义相符。
 
-//思路：朴素做法、hash算法、KMP模式匹配算法
+//fmt.Println(strings.Index("abc", "")) // 0
+
+//思路：朴素做法、hash算法、KMP模式匹配算法、Sunday匹配
+
+// Sunday匹配算法
+// 对⻬⽬标串和模式串，从前向后匹配
+// 关注主串中位于模式串后⾯的第⼀个元素（核⼼）
+// 如果关注的字符没有在⼦串中出现则直接跳过
+// 否则开始移动模式串，移动位数 = ⼦串⻓度 - 该字符最右出现的位置(以0开始)
 
 // hash
 func strStr28_1(haystack string, needle string) int {
@@ -93,6 +101,44 @@ func strStr28_3(s string, t string) int {
 		}
 		if j == lenT {
 			return i - lenT + 1
+		}
+	}
+	return -1
+}
+
+// Sunday匹配算法
+// 对⻬⽬标串和模式串，从前向后匹配
+// 关注主串中位于模式串后⾯的第⼀个元素（核⼼）
+// 如果关注的字符没有在⼦串中出现则直接跳过
+// 否则开始移动模式串，移动位数 = ⼦串⻓度 - 该字符最右出现的位置(以0开始)
+func strStr028_4(haystack string, needle string) int {
+	if len(needle) == 0 {
+		return 0
+	}
+	var m = make(map[byte]int)
+	for i, b := range []byte(needle) {
+		m[b] = i
+	}
+	var n = len(needle)
+	for i := 0; i <= len(haystack)-n; { // sunday匹配算法
+		j := 0
+		for ; j < n; j++ {
+			if haystack[i+j] != needle[j] {
+				break
+			}
+		}
+		if j == n {
+			return i
+		}
+		// 看i+n
+		if i+n < len(haystack) {
+			if idx, ok := m[haystack[i+n]]; !ok {
+				i += n
+			} else {
+				i += n - idx
+			}
+		} else {
+			break
 		}
 	}
 	return -1
