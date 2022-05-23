@@ -1,12 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	var s = "safa"
 	for i, b := range s {
 		fmt.Println(i, b)
 	}
+	//strings.Contains()
 }
 
 //if 2 > 1 {
