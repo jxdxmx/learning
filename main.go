@@ -2,13 +2,25 @@ package main
 
 import (
 	"fmt"
+	"leaning/interview"
 )
 
 func main() {
-	var s = "safa"
-	for i, b := range s {
-		fmt.Println(i, b)
-	}
+	fmt.Println(interview.FindMin_910())
+	//var wg = sync.WaitGroup{}
+	//wg.Add(1)
+	//go func() {
+	//	defer wg.Done()
+	//	time.Sleep(time.Second * 2)
+	//}()
+	//wg.Wait()
+	//wg.Wait()
+	//wg.Wait()
+	//wg.Wait()
+	//var s = "safa"
+	//for i, b := range s {
+	//	fmt.Println(i, b)
+	//}
 	//strings.Contains()
 }
 
