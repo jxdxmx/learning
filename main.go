@@ -5,6 +5,9 @@ import (
 	"leaning/interview"
 )
 
+type Node struct {
+}
+
 func main() {
 	fmt.Println(interview.FindMin_910())
 	//var wg = sync.WaitGroup{}
