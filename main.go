@@ -1,11 +1,18 @@
 package main
 
 import (
+	"container/list"
 	"fmt"
 	"leaning/interview"
 )
 
 type Node struct {
+}
+
+type LRU struct {
+	size      int
+	innerList *list.List
+	innerMap  map[int]*list.Element
 }
 
 func main() {
