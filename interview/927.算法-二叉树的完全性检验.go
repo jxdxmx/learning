@@ -15,6 +15,11 @@ package interview
 //输出：false
 //解释：值为 7 的结点没有尽可能靠向左侧。
 
+// 另一种解法：hasNoChild !! 如果false，表示未检测到结尾，true表示已到“结尾”。
+// 如果未true，那么，队列中的所有结点，不能有子节点！！
+// 如果右节点为空，hasNoChild=true。如果左节点不为空，push队列
+// 如果右节点不空，左节点空，return false
+
 type TreeNode927 struct {
 	Val   int
 	Left  *TreeNode927

@@ -46,7 +46,7 @@ func solveNQueens922(n int) [][]string {
 		}
 	}
 	dfs(0)
-	// fmt.Println(ans)
+	// fmt.Println(ans928)
 	var result = make([][]string, len(ans))
 	for i := 0; i < len(ans); i++ {
 		for j := 0; j < n; j++ {
