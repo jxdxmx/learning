@@ -5,5 +5,4 @@ type Per struct {
 }
 
 func main() {
-
 }
