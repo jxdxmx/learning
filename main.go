@@ -7,7 +7,11 @@ type Per struct {
 }
 
 func main() {
-	fmt.Println(len("aaa"))
-	str := "abab"
-	fmt.Println(str[0:2] == str[2:4])
+	var i = 0
+	for ; i < 5; i++ {
+		if i < 5 {
+			//break
+		}
+	}
+	fmt.Println(i)
 }

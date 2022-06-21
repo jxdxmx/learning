@@ -12,66 +12,71 @@ package interview
 //	调整后: 1->2->5->4->3->8->7->6->null .其中 1,2不调整,因为不够一组.
 //解析
 //原文: https://juejin.im/post/5d4f76325188253b49244dd0
-type ListNode025 struct {
-	Val  int
-	Next *ListNode025
-}
 
 /**
  * Definition for singly-linked list.
- * type ListNode025 struct {
+ * type ListNode901 struct {
  *     Val int
- *     Next *ListNode025
+ *     Next *ListNode901
  * }
  */
-func reverseKGroup025(head *ListNode025, k int) *ListNode025 {
-	var protect, last *ListNode025
-	end := getGroupEnd025(head, k) // 2
-	if protect == nil {
-		protect = end
+
+type ListNode901 struct {
+	Val  int
+	Next *ListNode901
+}
+
+func reverseKGroup901(head *ListNode901, k int) *ListNode901 {
+	var protect *ListNode901
+	var last *ListNode901
+	tail := getGroup901(head, k)
+	if tail == nil {
+		return head
 	}
-	last = &ListNode025{}
-	for end != nil {
-		next := end.Next // 3
-		newStart, newEnd := reverseTwo025(head, k)
-		last.Next = newStart
-		last = newEnd
+	for {
+		tail = getGroup901(head, k)
+		if tail == nil {
+			last.Next = head
+			break
+		}
+		next := tail.Next
+		h, t := reverse901(head, tail)
+		if last == nil {
+			last = t
+			protect = h
+		} else {
+			last.Next = h
+			last = t
+		}
 		head = next
-		end = getGroupEnd025(next, k)
-	}
-	if last != head {
-		last.Next = head
 	}
 	return protect
 }
 
-// return end
-func getGroupEnd025(start *ListNode025, k int) *ListNode025 {
-	if start == nil {
+func getGroup901(head *ListNode901, k int) *ListNode901 {
+	k--
+	for k > 0 && head != nil {
+		head = head.Next
+		k--
+	}
+	if k > 0 {
 		return nil
 	}
-	for start.Next != nil && k-1 > 0 {
-		start = start.Next
-		k--
-	}
-	if k-1 == 0 {
-		return start
-	}
-	return nil
+	return head
 }
 
-func reverseTwo025(start *ListNode025, k int) (*ListNode025, *ListNode025) {
-	var last *ListNode025
-	head := start
-	for k-1 > 0 {
-		nt := head.Next
+// 反转2
+func reverse901(head, tail *ListNode901) (*ListNode901, *ListNode901) {
+	h, t := head, tail
+	var last *ListNode901
+	for head != tail {
+		next := head.Next
 		head.Next = last
 		last = head
-		head = nt
-		k--
+		head = next
 	}
 	head.Next = last
-	return head, start
+	return t, h
 }
 
 ///**
@@ -83,7 +88,7 @@ func reverseTwo025(start *ListNode025, k int) (*ListNode025, *ListNode025) {
 // */
 //// 这个是顺序，1->2->3->4->5变成2->1->4->3->5
 //// 如果要逆序，1->2->3->4->5变成1->3->2->5->4,可以先看看总节点数，然后看“多余几个节点”，让head走几步，即可变成"顺序"
-//func reverseKGroup(head *ListNode025, k int) *ListNode025 {
+//func reverseKGroup901(head *ListNode025, k int) *ListNode025 {
 //	var protect,last,end *ListNode025
 //	newHeader := getNewHead(head,k)
 //	last = &ListNode025{}
