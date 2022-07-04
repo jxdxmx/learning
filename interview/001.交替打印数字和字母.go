@@ -19,23 +19,22 @@ import (
 //这⾥⽤到了两个 channel 负责通知，letter负责通知打印字⺟的goroutine来打印字⺟，
 //number⽤来通知打印数字的goroutine打印数字。
 //wait⽤来等待字⺟打印完成后退出循环。
+
 func F0001() {
 	var ch123 = make(chan struct{}, 1)
 	var chAbc = make(chan struct{}, 1)
 	var chEnd = make(chan struct{})
 	var wg sync.WaitGroup
 	wg.Add(2)
+	ch123 <- struct{}{}
 	go func() {
 		defer wg.Done()
 		i := 0
 		for {
-			select {
-			case <-ch123:
-				fmt.Print(i + 1)
-				fmt.Print(i + 2)
-				i += 2
-				chAbc <- struct{}{}
-			}
+			<-ch123
+			fmt.Printf("%d%d", i+1, i+2)
+			i += 2
+			chAbc <- struct{}{}
 			select {
 			case <-chEnd:
 				return
@@ -45,22 +44,17 @@ func F0001() {
 	}()
 	go func() {
 		defer wg.Done()
-		j := 0
-		var rs = []rune("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		var b byte = 'A' - 1
 		for {
-			select {
-			case <-chAbc:
-				fmt.Print(string(rs[j]))
-				fmt.Print(string(rs[j+1]))
-				j += 2
-				ch123 <- struct{}{}
-				if j >= len(rs)-1 {
-					close(chEnd)
-					return
-				}
+			<-chAbc
+			fmt.Print(string(b+1), string(b+2))
+			b += 2
+			ch123 <- struct{}{}
+			if b == 'Z' {
+				close(chEnd)
+				return
 			}
 		}
 	}()
-	ch123 <- struct{}{}
 	wg.Wait()
 }

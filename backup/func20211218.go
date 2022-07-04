@@ -20,7 +20,7 @@ func (d *data) test(s string) {
 	}
 }
 
-func f20211218() {
+func F20211218() {
 	var wg sync.WaitGroup
 	wg.Add(2)
 	var d data
