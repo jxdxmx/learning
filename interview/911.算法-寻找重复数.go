@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-10
+
 //https://leetcode.cn/problems/find-the-duplicate-number/
 //287. 寻找重复数
 
@@ -52,7 +54,7 @@ func findDuplicate(nums []int) int {
 			} else {
 				nums[i-1], nums[nums[i-1]-1] = nums[nums[i-1]-1], nums[i-1]
 			}
-			i--
+			i-- // 这里，交互好以后，需要继续对i做判断，所以i--,for会进行i++
 		}
 		// fmt.Println(i,2222,nums)
 	}

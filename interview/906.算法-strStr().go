@@ -2,6 +2,8 @@ package interview
 
 import "math"
 
+// 2022-07-10
+
 //https://leetcode.cn/problems/implement-strstr/
 //28. 实现 strStr()
 //当 needle 是空字符串时，我们应当返回什么值呢？这是⼀个在⾯试中很好的问题。

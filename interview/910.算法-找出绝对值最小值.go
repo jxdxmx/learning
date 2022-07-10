@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-10
+
 func FindMin_910() int {
 	var nums = []int{-1, 2, 3}
 	if len(nums) == 1 {
