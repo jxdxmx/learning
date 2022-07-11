@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-11
+
 import "fmt"
 
 //https://leetcode.cn/problems/merge-two-sorted-lists/
@@ -78,33 +80,31 @@ func reverseList_914(head *ListNode914) *ListNode914 {
 	return last
 }
 
-func splitNodeList_914(list *ListNode914) (list1 *ListNode914, list2 *ListNode914) {
-	if list.Next == nil {
-		return list, nil
+func print914(head *ListNode914) {
+	for head != nil {
+		fmt.Print(head.Val, " -> ")
+		head = head.Next
 	}
-	list1, list2 = list, list.Next
-	head1, head2 := list1, list2
-	var next1, next2 *ListNode914
-	for {
-		if head2.Next == nil {
-			next1 = nil
-			next2 = nil
-			break
+	fmt.Println()
+}
+
+func split914(head *ListNode914) (*ListNode914, *ListNode914) {
+	var l1, l2 *ListNode914 = &ListNode914{}, &ListNode914{}
+	p1, p2 := l1, l2
+	for head != nil {
+		l1.Next = head
+		l1 = l1.Next
+		head = head.Next
+		if head != nil {
+			l2.Next = head
+			l2 = l2.Next
+			head = head.Next
+		} else {
+			l2.Next = nil
 		}
-		next1 = head2.Next
-		if head2.Next.Next == nil {
-			next2 = nil
-			break
-		}
-		next2 = next1.Next
-		head1.Next = next1
-		head2.Next = next2
-		head1 = next1
-		head2 = next2
 	}
-	head1.Next = next1
-	head2.Next = next2
-	return
+	l1.Next = nil
+	return p1.Next, p2.Next
 }
 
 func printNodeList_914(root *ListNode914) {

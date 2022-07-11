@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-11
+
 //https://leetcode.cn/problems/palindrome-linked-list/
 //给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
 
@@ -24,31 +26,29 @@ type ListNode916 struct {
  * }
  */
 func isPalindrome916(head *ListNode916) bool {
-	newHead, num := reverse916(head)
-	for num/2 > 0 {
+	var x = 0
+	n, newHead := reverse916(head)
+	for x < n/2 {
 		if head.Val != newHead.Val {
 			return false
 		}
 		head = head.Next
 		newHead = newHead.Next
-		num--
+		x++
 	}
 	return true
 }
 
-// 反转链表，返回新链表头和链表节点数
-func reverse916(head *ListNode916) (*ListNode916, int) {
-	if head == nil {
-		return nil, 0
-	}
-	var num = 1
-	var last, h2 *ListNode916
+func reverse916(head *ListNode916) (int, *ListNode916) {
+	var newHead *ListNode916
+	var last *ListNode916
+	var i int
 	for head != nil {
-		h2 = &ListNode916{Val: head.Val}
-		h2.Next = last
-		last = h2
-		num++
+		newHead = &ListNode916{Val: head.Val}
+		newHead.Next = last
+		last = newHead
 		head = head.Next
+		i++
 	}
-	return last, num
+	return i, last
 }

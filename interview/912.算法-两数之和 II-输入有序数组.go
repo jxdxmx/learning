@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-11
+
 //https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
 //167. 两数之和 II - 输入有序数组
 //
@@ -25,17 +27,15 @@ package interview
 //输出：[1,2]
 //解释：-1 与 0 之和等于目标数 -1 。因此 index1 = 1, index2 = 2 。返回 [1, 2] 。
 func twoSum167(numbers []int, target int) []int {
-	var i, j = 0, len(numbers) - 1
+	i, j := 0, len(numbers)-1
 	for i < j {
-		for numbers[i]+numbers[j] > target {
-			j--
-		}
-		for numbers[i]+numbers[j] < target {
-			i++
-		}
 		if numbers[i]+numbers[j] == target {
 			return []int{i + 1, j + 1}
+		} else if numbers[i]+numbers[j] > target {
+			j--
+		} else {
+			i++
 		}
 	}
-	return nil
+	return []int{-1, -1}
 }
