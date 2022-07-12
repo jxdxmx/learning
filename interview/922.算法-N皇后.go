@@ -1,7 +1,9 @@
 package interview
 
-//https://leetcode.cn/problems/n-queens
-//51. N 皇后
+// 2022-07-12
+
+// https://leetcode.cn/problems/n-queens
+// 51. N 皇后
 
 //按照国际象棋的规则，皇后可以攻击与之处在同一行或同一列或同一斜线上的棋子。
 //n皇后问题 研究的是如何将 n个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
