@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-15
+
 //https://leetcode.cn/problems/check-completeness-of-a-binary-tree/
 //958. 二叉树的完全性检验
 //给定一个二叉树的 root ，确定它是否是一个 完全二叉树 。
@@ -35,48 +37,25 @@ type TreeNode927 struct {
  * }
  */
 func isCompleteTree927(root *TreeNode927) bool {
-	dept := getDepth927(root)
-	// fmt.Println(dept)
-	var queue []*TreeNode927
-	var dm = make(map[*TreeNode927]int)
-	dm[root] = 1
-	queue = append(queue, root)
-	flag := false
-	for len(queue) > 0 {
-		top := queue[0]
-		queue = queue[1:]
-		if dm[top] < dept-1 {
-			if top.Left == nil || top.Right == nil {
-				return false
-			}
-			queue = append(queue, top.Left)
-			queue = append(queue, top.Right)
-			dm[top.Left] = dm[top] + 1
-			dm[top.Right] = dm[top] + 1
-		} else if !flag && dm[top] == dept-1 {
-			if top.Right != nil && top.Left == nil {
-				return false
-			}
-			if top.Right == nil {
-				flag = true
-			}
-		} else if flag && dm[top] == dept-1 {
-			if top.Right != nil || top.Left != nil {
-				return false
-			}
+	var q []*TreeNode927
+	q = append(q, root)
+	var have = true
+	for len(q) > 0 {
+		top := q[0]
+		q = q[1:]
+		if top == nil {
+			continue
 		}
+		if top.Left == nil && top.Right != nil {
+			return false
+		}
+		if !have && (top.Left != nil || top.Right != nil) {
+			return false
+		}
+		if top.Left == nil || (top.Left != nil && top.Right == nil) {
+			have = false
+		}
+		q = append(q, top.Left, top.Right)
 	}
 	return true
-}
-
-func getDepth927(root *TreeNode927) int {
-	if root == nil {
-		return 0
-	}
-	ld := getDepth927(root.Left)
-	rd := getDepth927(root.Right)
-	if ld < rd {
-		ld = rd
-	}
-	return ld + 1
 }

@@ -1,5 +1,9 @@
 package interview
 
+// 2022-07-15
+
+// https://leetcode.cn/problems/binary-tree-postorder-traversal/
+
 /**
  * Definition for a binary tree node.
  * type TreeNode928 struct {
@@ -50,7 +54,7 @@ func postorderTraversal928_2(root *TreeNode928) []int {
 	var curr *TreeNode928 = root
 	for len(stack) > 0 {
 		for curr != nil {
-			res = append(res, curr.Val)
+			res = append(res, curr.Val) // 这里会出现root加入过2次。但是也没有问题，因为最后一次top后，stack变空了，所以答案并不会重复
 			stack = append(stack, curr)
 			curr = curr.Right
 		}

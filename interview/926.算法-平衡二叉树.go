@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-15
+
 //https://leetcode.cn/problems/balanced-binary-tree/
 //110. 平衡二叉树
 //给定一个二叉树，判断它是否是高度平衡的二叉树。
@@ -32,30 +34,30 @@ type TreeNode926 struct {
  * }
  */
 func isBalanced926(root *TreeNode926) bool {
-	_, v := dfs926(root)
-	return v
+	_, f := dfs926(root)
+	return f
 }
 
 func dfs926(root *TreeNode926) (int, bool) {
 	if root == nil {
 		return 0, true
 	}
-	d1, v1 := dfs926(root.Left)
-	if !v1 {
-		return 0, false
+	l, lf := dfs926(root.Left)
+	r, rf := dfs926(root.Right)
+	if lf && rf && abs(l-r) <= 1 {
+		return max(l, r) + 1, true
 	}
-	d2, v2 := dfs926(root.Right)
-	if !v2 {
-		return 0, false
-	}
-	if d1-d2 > 1 || d2-d1 > 1 {
-		return 0, false
-	}
-	return max(d1, d2) + 1, true
+	return -1, false
 }
-func max(x, y int) int {
-	if x > y {
-		return x
+func abs(x int) int {
+	if x < 0 {
+		return -x
 	}
-	return y
+	return x
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
