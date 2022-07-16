@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-16
+
 //https://leetcode.cn/problems/longest-common-subsequence/
 //1143. 最长公共子序列
 //给定两个字符串 text1 和 text2，返回这两个字符串的最长 公共子序列 的长度。如果不存在 公共子序列 ，返回 0 。
@@ -30,24 +32,14 @@ func longestCommonSubsequence935(text1 string, text2 string) int {
 	for i := 0; i < m; i++ {
 		f = append(f, make([]int, n))
 	}
-	for i := 0; i < m; i++ {
-		for j := 0; j < n; j++ {
-			if i == 0 {
-				f[0][j] = 1
-			} else if j == 0 {
-				f[i][0] = 1
-			}
-		}
-	}
-	for i := 1; i < m; i++ {
-		for j := 1; j < n; j++ {
-			if text1[i] == text2[j] {
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if i == 0 || j == 0 {
+				f[i][j] = 1
+			} else if text1[i] == text2[j] {
 				f[i][j] = f[i-1][j-1] + 1
-				// fmt.Println(111,i,j,f[i][j])
 			} else {
-				// f[i][j] = max935(f[i][j-1],f[i-1][j],f[i-1][j-1](当前不同),f[i-1][j-1]+1(当前相同))
-				f[i][j] = max935(f[i][j], f[i-1][j], f[i][j-1], f[i-1][j-1])
-				// fmt.Println(i,j,f[i][j])
+				f[i][j] = max935(f[i][j-1], f[i-1][j])
 			}
 		}
 	}

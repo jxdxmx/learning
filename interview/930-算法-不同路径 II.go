@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-16
+
 //https://leetcode.cn/problems/unique-paths-ii/
 //63. 不同路径 II
 //一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。
@@ -20,37 +22,26 @@ package interview
 //输出：1
 
 //注意：[[0]] = 1  [[1]] = 0
-
-func uniquePathsWithObstacles930(obstacleGrid [][]int) int {
-	if obstacleGrid[0][0] == 1 {
-		return 0
-	}
-	m, n := len(obstacleGrid), len(obstacleGrid[0])
+func uniquePathsWithObstacles930(grid [][]int) int {
+	n, m := len(grid), len(grid[0])
 	var f [][]int
-	for i := 0; i < m; i++ {
-		f = append(f, make([]int, n))
+	for i := 0; i < n; i++ {
+		f = append(f, make([]int, m))
 	}
-	f[0][0] = 1
-	for i := 1; i < m; i++ {
-		if obstacleGrid[i][0] == 1 {
-			break
-		}
-		f[i][0] = 1
-	}
-	for i := 1; i < n; i++ {
-		if obstacleGrid[0][i] == 1 {
-			break
-		}
-		f[0][i] = 1
-	}
-	for i := 1; i < m; i++ {
-		for j := 1; j < n; j++ {
-			if obstacleGrid[i][j] == 1 {
+	for i := 0; i < n; i++ {
+		for j := 0; j < m; j++ {
+			if grid[i][j] == 1 {
 				f[i][j] = 0
+			} else if i == 0 && j == 0 {
+				f[i][j] = 1
+			} else if i == 0 {
+				f[i][j] = f[i][j-1]
+			} else if j == 0 {
+				f[i][j] = f[i-1][j]
 			} else {
-				f[i][j] = f[i][j-1] + f[i-1][j]
+				f[i][j] = f[i-1][j] + f[i][j-1]
 			}
 		}
 	}
-	return f[m-1][n-1]
+	return f[n-1][m-1]
 }

@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-16
+
 import "math"
 
 //https://leetcode.cn/problems/edit-distance/
@@ -53,7 +55,7 @@ func minDistance934(word1 string, word2 string) int {
 				f[i][j] = f[i-1][j-1]
 			} else {
 				// f[i][j] = min934(f[i-1][j]+1(删除字符),f[i][j-1]+1(删除字符),f[i-1][j-1](当前字符相同),f[i-1][j-1]+1(替换当前字符))
-				f[i][j] = min934(f[i][j], f[i-1][j]+1, f[i][j-1]+1, f[i-1][j-1]+1)
+				f[i][j] = min934(f[i-1][j], f[i][j-1], f[i-1][j-1]) + 1
 			}
 		}
 	}

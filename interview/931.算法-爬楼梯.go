@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-16
+
 //https://leetcode.cn/problems/climbing-stairs/
 //70. 爬楼梯
 //假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
@@ -20,6 +22,7 @@ package interview
 //2. 1 阶 + 2 阶
 //3. 2 阶 + 1 阶
 
+// 注意：直接使用递归,return climbStairs931(n-1)+climbStairs931(n-2) n=40就会超时
 func climbStairs931(n int) int {
 	var f = make([]int, n+1)
 	f[0] = 1

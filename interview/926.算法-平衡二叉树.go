@@ -44,18 +44,18 @@ func dfs926(root *TreeNode926) (int, bool) {
 	}
 	l, lf := dfs926(root.Left)
 	r, rf := dfs926(root.Right)
-	if lf && rf && abs(l-r) <= 1 {
-		return max(l, r) + 1, true
+	if lf && rf && abs926(l-r) <= 1 {
+		return max926(l, r) + 1, true
 	}
 	return -1, false
 }
-func abs(x int) int {
+func abs926(x int) int {
 	if x < 0 {
 		return -x
 	}
 	return x
 }
-func max(a, b int) int {
+func max926(a, b int) int {
 	if a > b {
 		return a
 	}

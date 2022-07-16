@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-16
+
 //https://leetcode.cn/problems/coin-change/
 //https://leetcode.cn/problems/coin-change-2/
 
@@ -72,10 +74,8 @@ func change932(amount int, coins []int) int {
 	var f = make([]int, amount+1)
 	f[0] = 1
 	for _, c := range coins {
-		for i := 1; i <= amount; i++ {
-			if i >= c {
-				f[i] += f[i-c]
-			}
+		for i := c; i <= amount; i++ {
+			f[i] += f[i-c]
 		}
 	}
 	return f[amount]
