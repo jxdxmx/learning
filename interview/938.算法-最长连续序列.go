@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-17
+
 //https://leetcode.cn/problems/longest-consecutive-sequence/
 //128. 最长连续序列
 //给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。
@@ -22,18 +24,16 @@ func longestConsecutive938(nums []int) int {
 	}
 	var m = make(map[int]int)
 	var ans int
-	for i := 0; i < n; i++ {
+	for i := 0; i < len(nums); i++ {
 		if _, ok := m[nums[i]]; ok {
 			continue
 		}
 		m[nums[i]] = i
-	}
-	for num, index := range m {
-		if _, ok := m[num-1]; ok {
-			union938(fa, index, m[num-1])
+		if idx1, ok := m[nums[i]-1]; ok {
+			union938(fa, i, idx1)
 		}
-		if _, ok := m[num+1]; ok {
-			union938(fa, index, m[num+1])
+		if idx2, ok := m[nums[i]+1]; ok {
+			union938(fa, i, idx2)
 		}
 	}
 	for i := 0; i < n; i++ {

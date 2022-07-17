@@ -1,5 +1,7 @@
 package interview
 
+// 2022-07-17
+
 import "math"
 
 //https://leetcode.cn/problems/longest-common-prefix/
