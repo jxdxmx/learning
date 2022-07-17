@@ -1,6 +1,9 @@
 package interview
 
+// 2022-07-17
+
 //https://leetcode.cn/problems/longest-palindromic-substring/
+
 //5. 最长回文子串
 //给你一个字符串 s，找到 s 中最长的回文子串。
 
@@ -67,4 +70,31 @@ func valid936(s string, left, right int) bool {
 		right--
 	}
 	return true
+}
+
+// 暴力解法
+func longestPalindrome9362(s string) string {
+	n := len(s)
+	var ans = 1
+	var start = 0
+	for i := 0; i < n; i++ {
+		// bab
+		l := min936(i, n-i-1)
+		for j := 1; j <= l; j++ {
+			if 2*j+1 > ans && valid936(s, i-j, i+j) {
+				ans = 2*j + 1
+				start = i - j
+			}
+		}
+
+		// bb
+		l = min936(i, n-i-2)
+		for j := 0; j <= l; j++ {
+			if 2*j+2 > ans && valid936(s, i-j, i+j+1) {
+				ans = 2*j + 2
+				start = i - j
+			}
+		}
+	}
+	return s[start : start+ans]
 }
